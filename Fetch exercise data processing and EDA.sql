@@ -88,7 +88,7 @@ ORDER BY 3 desc;
 SELECT  
 BRAND
 ,COUNT(DISTINCT RECEIPT_ID) as purchases -- receipts scanned
-,SUM(FINAL_SALE) as sale  -- sales
+,SUM(FINAL_SALE) as sales  -- sales
 FROM `fetch-exercise-437700.fetch.master`
 WHERE DATE(CREATED_DATE) <= DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH) 
 GROUP BY 1
