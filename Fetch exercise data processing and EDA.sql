@@ -135,6 +135,16 @@ SELECT USER_ID, age, STATE, GENDER
 FROM `fetch-exercise-437700.fetch.master`
 GROUP BY 1,2,3,4
 ORDER BY 5 DESC;
+-- Power users' criteria - frequency: What's the distribution of number of receipts scanned?
+WITH stg AS (
+  SELECT USER_ID
+  ,COUNT(DISTINCT RECEIPT_ID) as receipts_scanned
+  FROM `fetch-exercise-437700.fetch.master`
+  GROUP BY 1
+)
+
+SELECT receipts_scanned, COUNT(USER_ID) as user_cnt
+FROM stg GROUP BY 1 ORDER BY 1;
 
 -- Which is the leading brand in the Dips & Salsa category?
 SELECT  
@@ -144,7 +154,8 @@ BRAND
 FROM `fetch-exercise-437700.fetch.master`
 where CATEGORY_2 = 'Dips & Salsa'
 GROUP BY 1
-ORDER BY 3 desc
+ORDER BY 2 desc; -- ranked by receipts
+-- ORDER BY 3 desc -- ranked by sales
 
 -- At what percent has Fetch grown year over year?
 -- (user only, assuming all users stay active)
